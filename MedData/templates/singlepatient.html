@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% from "showlinks.html" import show_links %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>single patient profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename ='singlepatient.css')}}" type = "text/css">
+</head>
+<body>
+      <div class="parent">
+        <div class="child child1">
+            <h1 class="text-center"><i>MedDataIns</i></h1>
+        </div>
+        <div class="child child3">
+          {{ show_links() }}
+      </div>
+
+        <div class="child child4">
+          <h3 class="m-2">Patient Profile Page</h3>
+      </div>
+
+      <div class="child child5" style="color:rgb(0, 75, 93);">
+        {% if user %}
+        <h3 class="m-2"><i>User : {{user['name']}}</i></h3>
+        {% endif %}
+      </div>
+
+
+        <div class="child child6 container">
+            <ul class="nav nav-tabs nav-fill mb-3">
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;"  href="{{ url_for('dashboard')}}">View All Patients</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;"  
+                  href="{{url_for('addnewpatient')}}">Add New Patient</a>
+                </li>
+              </ul>
+            <div class="centercontent">
+                <div class="card">
+                    <div class="row g-0">
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h3 class="card-title">Patient Details</h3>
+                          {% if single_patient %}
+                          <ul class="list-group list-group-numbered">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                              <div class="ms-2 me-auto">
+                                <div class="fw-bold">Full Name : {{single_patient['name']}}</div>
+                              </div>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                              <div class="ms-2 me-auto">
+                                <div class="fw-bold">Phone : {{single_patient['phone']}}</div>
+                                </div>
+                           
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Address : {{single_patient['address']}}</div>
+                                    </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Age : {{single_patient['age']}}</div>
+                                </div>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Gender : {{single_patient['gender']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Blood Group : {{single_patient['blood_type']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Medical Condition : {{single_patient['medical_condition']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Date of Admission : {{single_patient['date_of_admission']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Doctor : {{single_patient['doctor']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Hospital : {{single_patient['hospital']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Insurance Provider : {{single_patient['insurance_provider']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Billing amount (in Rs.) : {{single_patient['billing_amount']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Admission Type : {{single_patient['admission_type']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Date of Discharge : {{single_patient['discharge_date']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Prescription : {{single_patient['medication']}}</div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                  <div class="fw-bold">Test Results : {{single_patient['test_results']}}</div>
+                                </div>
+                              </li>
+                          </ul>
+                          {% endif %}  
+                          <p class="card-text"><small class="text-muted">Last updated on : </small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+ 
+        <div class="child child7" style="background-color:rgb(0, 75, 93); color:whitesmoke;">
+            <p class="p-3 text-center">Developed and Designed by Vaishnavi Bhure, Email :- vjbhure@gmail.com</p>
+        </div>
+      </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

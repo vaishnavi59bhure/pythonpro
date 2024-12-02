@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% from "showlinks.html" import show_links %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" type = "text/css">
+</head>
+<body>
+      <div class="parent">
+        <div class="child child1">
+            <h1 class="text-center"><i>MedDataIns</i></h1>
+        </div>
+        <div class="child child3">
+          {{ show_links() }}
+      </div>
+
+        <div class="child child4">
+            <h3 class="m-2">Update Patient</h3>
+        </div>
+
+        <div class="child child5" style="color:rgb(0, 75, 93);">
+          {% if user %}
+          <h3 class="m-2"><i>User : {{user['name']}}</i></h3>
+          {% endif %}
+        </div>
+
+        <div class="child child6left">
+            <div class="circledivleft">
+                <div class="circleleft">
+                </div>
+              </div>
+        </div>
+
+        <div class="child child6 container" style="color:rgb(0, 75, 93);">
+            <ul class="nav nav-tabs nav-fill mb-3">
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;"  href="{{url_for('dashboard')}}">View All Patient</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style=" background-color:rgb(0, 75, 93); color:whitesmoke;" href="{{url_for('addnewpatient')}}">Add New Patient</a>
+                </li>
+              </ul>
+              <div class="table-responsive-lg caption-top">
+                <caption><h3>Update Patients</h3></caption>
+                 <hr>
+                 {% if single_patient %}
+                      <!-- Form here -->
+                <form class="p-3" action="{{ url_for('updatepatient', id=single_patient.id) }}" method="POST">
+                     <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-2">
+                            <label for="patient.id" class="form-label">Patient ID</label>
+                            <input type="text" class="form-control" id="patient.id" value = "{{single_patient['id']}}" name="id" readonly>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="patient.name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="patient.name" value = "{{single_patient['name']}}" name = "name">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="patient.phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="patient.phone" value="{{single_patient['phone']}}" name="phone">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" id="patient.address" value = "{{single_patient['address']}}" name = "address">
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Age</label>
+                            <input type="text" class="form-control" id="patient.age" value= "{{single_patient['age']}}" name="age">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender</label>
+                           <select class="form-control" name="gender" required>
+                                <option value="" {% if gender==None %}selected{% endif %}>Select Gender</option>
+                                <option value="Male" {% if gender=="Male" %}selected{% endif %}>Male</option>
+                                <option value="Female" {% if gender=="Female" %}selected{% endif %}>Female</option>
+                                <option value="Other" {% if gender=="Other" %}selected{% endif %}>Other</option>
+                           </select>
+                        </div>
+
+                        <div class="form-group">
+                           <label>Blood Type</label>
+                            <select class="form-control" name="blood_type">
+                                <option value="" {% if blood_type=="" or single_patient.blood_type is none %}selected{% endif %}>Select Blood Type</option>
+                                <option value="A+" {% if blood_type=="A+" %}selected{% endif %}>A+</option>
+                                <option value="A-" {% if blood_type=="A-" %}selected{% endif %}>A-</option>
+                                <option value="B+" {% if blood_type=="B+" %}selected{% endif %}>B+</option>
+                                <option value="B-" {% if blood_type=="B-" %}selected{% endif %}>B-</option>
+                                <option value="AB+" {% if blood_type=="AB+" %}selected{% endif %}>AB+</option>
+                                <option value="AB-" {% if blood_type=="AB-" %}selected{% endif %}>AB-</option>
+                                <option value="O+" {% if blood_type=="O+" %}selected{% endif %}>O+</option>
+                                <option value="O-" {% if blood_type=="O-" %}selected{% endif %}>O-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patient.medical_condition">Medical Condition</label>
+                            <input type="text" class="form-control" id="patient.medical_condition" value= "{{single_patient['medical_condition']}}" name="medical_condition">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patient.date_of_admission">Date of Admission</label>
+                            <input type="date" class="form-control" id="patient.date_of_admission" value= "{{single_patient['date_of_admission']}}" name="date_of_admission" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patient.doctor">Doctor</label>
+                            <input type="text" class="form-control" id="patient.doctor" value= "{{single_patient['doctor']}}" name="doctor">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patient.hospital">Hospital</label>
+                            <input type="text" class="form-control" id="patient.hospital" value= "{{single_patient['hospital']}}" name="hospital">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.insurance_provider">Insurance Provider</label>
+                        <input type="text" class="form-control" id="patient.insurance_provider" value= "{{single_patient['insurance_provider']}}" name="insurance_provider">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.billing_amount">Billing Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="patient.billing_amount" value= "{{single_patient['billing_amount']}}" name="billing_amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.admission_type">Admission Type</label>
+                        <input type="text" class="form-control" id="patient.admission_type" value= "{{single_patient['admission_type']}}" name="admission_type">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.discharge_date">Discharge Date</label>
+                        <input type="date" class="form-control" id="patient.discharge_date" value= "{{single_patient['discharge_date']}}" name="discharge_date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.medication">Medication</label>
+                        <input type="text" class="form-control" id="patient.medication" value= "{{single_patient['medication']}}" name="medication">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patient.test_results">Test Results</label>
+                        <input type="text" class="form-control" id="patient.test_results" value= "{{single_patient['test_results']}}" name="test_results">
+                    </div>
+                    {% else %}
+                        <p>No patient data available to update.</p>
+                    {% endif %}
+                <button type="submit" class="btn text-light m-3" style="background-color:rgb(0, 75, 93);">Update Patient</button>
+                </form>
+              </div>
+        </div>
+
+        <div class="child child6right">
+            <div class="circledivright">
+                <div class="circleright">
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

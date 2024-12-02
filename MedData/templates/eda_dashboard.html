@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDA Dashboard</title>
+</head>
+<body>
+    <h1>Exploratory Data Analysis Dashboard</h1>
+
+    <h2>Summary Statistics</h2>
+    <div>{{ summary|safe }}</div>
+
+    <h2>Visualizations</h2>
+    <div>
+        {% for img in eda_images %}
+            <div style="margin-bottom: 20px;">
+                <img src="data:image/png;base64,{{ img }}" alt="Visualization">
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('Index') }}">Back to Home</a>
+</body>
+</html>
+s
